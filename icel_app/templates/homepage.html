@@ -39,13 +39,13 @@
             <li><a onclick="hideMenu()" href="#home">Home</a></li>
             <li><a onclick="hideMenu()" href="#calendar-header">ICEL Calendar</a></li>
             <li><a onclick="hideMenu()" href="#about-team">About Team</a></li>
-            <li><a href="{% url 'index' %}">Log out</a></li>
+            <li><a href="{% url 'logout' %}">Log out</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="content">
-      <h1 id="home">Welcome ICEL Employee</h1>
+        <h1 id="home">Welcome {{request.user.username}}!</h1>
       <h2>Vision</h2>
       <p>To be a model of inclusive excellence, empowering and enriching all stakeholders, while promoting sustainability in the energy sector.</p>
       <h2>Mission</h2>

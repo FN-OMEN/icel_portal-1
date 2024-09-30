@@ -68,5 +68,34 @@
       </div>
     </div>
   </div>
+  <script>
+    function togglePassword() {
+      var passwordField = document.getElementById("password");
+      var eyeIcon = document.getElementById("eyeicon");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+      } else {
+        passwordField.type = "password";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+      }
+    }
+
+    function togglePassword2() {
+      var passwordField2 = document.getElementById("password-2");
+      var eyeIcon2 = document.getElementById("eyeicon-2");
+      if (passwordField2.type === "password") {
+        passwordField2.type = "text";
+        eyeIcon2.classList.remove("fa-eye");
+        eyeIcon2.classList.add("fa-eye-slash");
+      } else {
+        passwordField2.type = "password";
+        eyeIcon2.classList.remove("fa-eye-slash");
+        eyeIcon2.classList.add("fa-eye");
+      }
+    }
+  </script>
 </body>
 </html>

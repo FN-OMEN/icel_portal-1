@@ -1,27 +1,23 @@
-import re
-from django.core.mail import send_mail
-from django.shortcuts import render, redirect
-from .forms import SignUpForm, LoginForm
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from django.http import HttpResponse
-from django.views import View
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.tokens import default_token_generator
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import send_mail
+from django.shortcuts import redirect, render
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.views import View
 
-
-def email_validation(email):
-    # Basic validation for email format
-    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    return re.match(email_regex, email) is not None
+from .forms import SignUpForm
 
 
 # Homepage view
+@login_required
 def homepage(request):
-    return render(request, 'homepage.html')
+    return render(request, "homepage.html")
+
 
 def incident_form(request):
     if request.method == "POST":
@@ -35,7 +31,9 @@ def incident_form(request):
         date_reported = request.POST.get("date_reported")
         observed_by = request.POST.get("observed_by")
         category = request.POST.get("category")
-        incident_types = request.POST.getlist("incident_type")  # Updated from "incident_types" to "incident_type" to match the name in your HTML.
+        incident_types = request.POST.getlist(
+            "incident_type"
+        )  # Updated from "incident_types" to "incident_type" to match the name in your HTML.
         upload = request.FILES.get("incident_upload")
 
         # Save the uploaded file
@@ -65,32 +63,32 @@ def incident_form(request):
             subject,
             message,
             settings.DEFAULT_FROM_EMAIL,
-            ['isaiahdurojaiye9@gmail.com'],
+            ["isaiahdurojaiye9@gmail.com"],
             fail_silently=False,
         )
 
-        return redirect('homepage') 
-    return render(request, 'incident_form.html')
+        return redirect("homepage")
+    return render(request, "incident_form.html")
 
 
-#POOL_CAR_request_view
+# POOL_CAR_request_view
 def pool_car_request(request):
-    if request.method == 'POST':
-        date_requested = request.POST.get('R-datecheckin')
-        requestor_name = request.POST.get('requestor_name')
-        phone_number = request.POST.get('phone_number')
-        car_no = request.POST.get('car_no')
-        pick_up_location = request.POST.get('pick_up_location')
-        drop_off_destination = request.POST.get('drop_off_destination')
-        return_location = request.POST.get('return_location')
-        purpose_of_trip = request.POST.get('purpose_of_trip')
-        departure_date = request.POST.get('departure_date')
-        return_date = request.POST.get('return_date')
-        departure_time = request.POST.get('departure_time')
-        estimated_return_time = request.POST.get('estimated_return_time')
-        director_name = request.POST.get('director_name')
-        director_designation = request.POST.get('director_designation')
-        director_email = request.POST.get('director_email')
+    if request.method == "POST":
+        date_requested = request.POST.get("R-datecheckin")
+        requestor_name = request.POST.get("requestor_name")
+        phone_number = request.POST.get("phone_number")
+        car_no = request.POST.get("car_no")
+        pick_up_location = request.POST.get("pick_up_location")
+        drop_off_destination = request.POST.get("drop_off_destination")
+        return_location = request.POST.get("return_location")
+        purpose_of_trip = request.POST.get("purpose_of_trip")
+        departure_date = request.POST.get("departure_date")
+        return_date = request.POST.get("return_date")
+        departure_time = request.POST.get("departure_time")
+        estimated_return_time = request.POST.get("estimated_return_time")
+        director_name = request.POST.get("director_name")
+        director_designation = request.POST.get("director_designation")
+        director_email = request.POST.get("director_email")
 
         subject = f"Pool Car Request from {requestor_name}"
         message = f"""
@@ -115,35 +113,38 @@ def pool_car_request(request):
                 subject,
                 message,
                 settings.DEFAULT_FROM_EMAIL,
-                ['isaiahdurojaiye9@gmail.com', 'ayokanmiamos@gmail.com'], 
+                ["isaiahdurojaiye9@gmail.com", "ayokanmiamos@gmail.com"],
                 fail_silently=False,
             )
-            return redirect('homepage') 
+            return redirect("homepage")
         except Exception as e:
             print(f"Error sending email: {e}")
-            return render(request, 'pool_car_request.html', {'error': 'Failed to send the email.'})
+            return render(
+                request, "pool_car_request.html", {"error": "Failed to send the email."}
+            )
 
-    return render(request, 'pool_car_request.html')
+    return render(request, "pool_car_request.html")
+
 
 def travel_notice(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         # Handle Travel By Air form submission
-        if 'trip-type' in request.POST:  # Check if it's the air travel form
-            passenger_names = request.POST.getlist('passenger_name')
-            trip_type = request.POST.get('trip-type')
-            preferred_airline = request.POST.get('preferred_airline')
-            preferred_flight_class = request.POST.get('preferred_flight_class')
-            ticket_type = request.POST.get('ticket-type')
-            flight_type = request.POST.get('flight-type')
-            routes = request.POST.get('routes')
-            departure_date = request.POST.get('checkin') 
-            preferred_departure_time = request.POST.get('departure-time')
-            arrival_date = request.POST.get('arrival_date')  
-            preferred_arrival_time = request.POST.get('arrival-time')
-            luggage_weight = request.POST.get('luggage_weight')
+        if "trip-type" in request.POST:  # Check if it's the air travel form
+            passenger_names = request.POST.getlist("passenger_name")
+            trip_type = request.POST.get("trip-type")
+            preferred_airline = request.POST.get("preferred_airline")
+            preferred_flight_class = request.POST.get("preferred_flight_class")
+            ticket_type = request.POST.get("ticket-type")
+            flight_type = request.POST.get("flight-type")
+            routes = request.POST.get("routes")
+            departure_date = request.POST.get("checkin")
+            preferred_departure_time = request.POST.get("departure-time")
+            arrival_date = request.POST.get("arrival_date")
+            preferred_arrival_time = request.POST.get("arrival-time")
+            luggage_weight = request.POST.get("luggage_weight")
 
             # Prepare email content for air travel
-            email_subject = 'New Travel By Air Form Submission'
+            email_subject = "New Travel By Air Form Submission"
             email_body = f"""
             Passenger Names: {', '.join(passenger_names)}
             Trip Type: {trip_type}
@@ -163,27 +164,27 @@ def travel_notice(request):
             send_mail(
                 email_subject,
                 email_body,
-                'from@example.com',  # Replace with your email
-                ['recipient@example.com'],  # Replace with the recipient's email
+                "from@example.com",  # Replace with your email
+                ["recipient@example.com"],  # Replace with the recipient's email
                 fail_silently=False,
             )
 
         # Handle Travel By Road form submission
-        elif 'vehicle-type' in request.POST:  # Check if it's the car travel form
-            car_passenger_names = request.POST.getlist('passenger_name')
-            vehicle_type = request.POST.get('vehicle-type')
-            journey_type = request.POST.get('journey-type')
-            departure_location = request.POST.get('departure-location')
-            departure_date_car = request.POST.get('checkin')
-            preferred_departure_time_car = request.POST.get('departure-time')
-            destination_location = request.POST.get('destination')
-            return_location = request.POST.get('return-location')
-            expected_arrival_date = request.POST.get('arrival-date')
-            expected_arrival_time = request.POST.get('arrival-time')
-            security_escort = request.POST.get('secrity-escort')
+        elif "vehicle-type" in request.POST:  # Check if it's the car travel form
+            car_passenger_names = request.POST.getlist("passenger_name")
+            vehicle_type = request.POST.get("vehicle-type")
+            journey_type = request.POST.get("journey-type")
+            departure_location = request.POST.get("departure-location")
+            departure_date_car = request.POST.get("checkin")
+            preferred_departure_time_car = request.POST.get("departure-time")
+            destination_location = request.POST.get("destination")
+            return_location = request.POST.get("return-location")
+            expected_arrival_date = request.POST.get("arrival-date")
+            expected_arrival_time = request.POST.get("arrival-time")
+            security_escort = request.POST.get("secrity-escort")
 
             # Prepare email content for car travel
-            email_subject_car = 'New Travel By Road Form Submission'
+            email_subject_car = "New Travel By Road Form Submission"
             email_body_car = f"""
             Car Passenger Names: {', '.join(car_passenger_names)}
             Vehicle Type: {vehicle_type}
@@ -202,84 +203,87 @@ def travel_notice(request):
             send_mail(
                 email_subject_car,
                 email_body_car,
-                'from@example.com',  # Replace with your email
-                ['recipient@example.com'],  # Replace with the recipient's email
+                "from@example.com",  # Replace with your email
+                ["recipient@example.com"],  # Replace with the recipient's email
                 fail_silently=False,
             )
 
-        return redirect('success')  # Redirect to a success page or similar
+        return redirect("success")  # Redirect to a success page or similar
 
-    return render(request, 'travel.html')  # Render the form on GET request
+    return render(request, "travel.html")  # Render the form on GET request
 
 
 def contact_view(request):
-    if request.method == 'POST':
-        first_name = request.POST.get('firstName')
-        last_name = request.POST.get('lastName')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
+    if request.method == "POST":
+        first_name = request.POST.get("firstName")
+        last_name = request.POST.get("lastName")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        message = request.POST.get("message")
 
         # Compose the email
-        subject = 'Contact Form Submission'
+        subject = "Contact Form Submission"
         message_body = f"Name: {first_name} {last_name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
-        recipient_list = ['itsupport@imperialcrestenergy.com']
+        recipient_list = ["itsupport@imperialcrestenergy.com"]
 
         # Send email
         send_mail(subject, message_body, settings.DEFAULT_FROM_EMAIL, recipient_list)
 
-        return redirect('success_url')  # Redirect to a success page or the same page
+        return redirect("success_url")  # Redirect to a success page or the same page
 
-    return render(request, 'contact.html')
+    return render(request, "contact.html")
+
 
 # Requisitions view
 def requisitions(request):
-    return render(request, 'requisitions.html')
+    return render(request, "requisitions.html")
+
 
 def logout_view(request):
-    return redirect('login')
+    print("logging out")
+    logout(request)
+    return redirect(settings.LOGOUT_REDIRECT_URL)
+
 
 def signup_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
+            user.set_password(form.cleaned_data["password"])
             user.save()
-            messages.success(request, 'Account created successfully.')
-            return redirect('index')  # Redirect to login page after signup
+            messages.success(request, "Account created successfully.")
+            return redirect("index")  # Redirect to login page after signup
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, "signup.html", {"form": form})
+
 
 def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        # Validate email format
-        if not email_validation(email): 
-            messages.error(request, 'Invalid email or password.')
-            return render(request, 'index.html')
-        # Validate password
-        if len(password) < 8 or not re.search(r'[a-z]', password) or not re.search(r'[A-Z]', password) or not re.search(r'[0-9]', password) or not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
-            messages.error(request, 'Password must be at least 8 characters long, include a lowercase letter, an uppercase letter, a number, and a symbol.')
-            return render(request, 'index.html')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
         # Authenticate user
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('homepage')
+            redirect_url = (
+                request.POST.get("next") or request.GET.get("next") or "homepage"
+            )
+            return redirect(redirect_url)
         else:
-            messages.error(request, 'Invalid email or password.')
-    
-    return render(request, 'index.html')
+            messages.error(request, "Invalid username or password.")
+
+    return render(request, "index.html")
+
 
 class ForgotPasswordView(View):
     def get(self, request):
-        return render(request, 'forgot_password.html')
+        return render(request, "forgot_password.html")
 
     def post(self, request):
-        email = request.POST['email']
+        email = request.POST["email"]
         try:
             user = User.objects.get(email=email)
             subject = "Password Reset Requested"
@@ -292,7 +296,14 @@ class ForgotPasswordView(View):
                 settings.DEFAULT_FROM_EMAIL,
                 [email],
             )
-            return render(request, 'forgot_password.html', {'message': 'Check your email for a reset link.'})
+            return render(
+                request,
+                "forgot_password.html",
+                {"message": "Check your email for a reset link."},
+            )
         except User.DoesNotExist:
-            return render(request, 'forgot_password.html', {'error': 'No account found with this email.'})
-
+            return render(
+                request,
+                "forgot_password.html",
+                {"error": "No account found with this email."},
+            )
