@@ -9,7 +9,8 @@ from django.shortcuts import redirect, render
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.views import View
-
+from django.http import HttpResponse
+from django.core.mail import EmailMessage
 from .forms import SignUpForm
 
 
@@ -20,56 +21,41 @@ def homepage(request):
 
 
 def incident_form(request):
-    if request.method == "POST":
-        id_no = request.POST.get("id_no")
-        date = request.POST.get("date")
-        department = request.POST.get("department")
-        location = request.POST.get("location")
-        description = request.POST.get("description")
-        corrective_action = request.POST.get("corrective_action")
-        date_observed = request.POST.get("date_observed")
-        date_reported = request.POST.get("date_reported")
-        observed_by = request.POST.get("observed_by")
-        category = request.POST.get("category")
-        incident_types = request.POST.getlist(
-            "incident_type"
-        )  # Updated from "incident_types" to "incident_type" to match the name in your HTML.
-        upload = request.FILES.get("incident_upload")
+    if request.method == 'POST':
+        # Get form data
+        id_no = request.POST.get('id_no')
+        date = request.POST.get('date')
+        department = request.POST.get('department')
+        location = request.POST.get('location')
+        description = request.POST.get('description')
+        corrective_action = request.POST.get('corrective_action')
+        date_observed = request.POST.get('date_observed')
+        date_reported = request.POST.get('date_reported')
+        observed_by = request.POST.get('observed_by')
+        category = request.POST.getlist('category')  # get multiple selected categories
+        incident_type = request.POST.getlist('incident_type')  # get multiple selected incident types
 
-        # Save the uploaded file
-        uploaded_file_url = None
-        if upload:
-            fs = FileSystemStorage()
-            filename = fs.save(upload.name, upload)
-            uploaded_file_url = fs.url(filename)
+        # Handle file upload
+        incident_upload = request.FILES.get('incident_upload')
 
-        # Construct the email
-        subject = f"Incident Report from {observed_by}"
-        message = f"""
-        ID No.: {id_no}
-        Date: {date}
-        Department: {department}
-        Location: {location}
-        Incident Description: {description}
-        Corrective Action: {corrective_action}
-        Date Observed: {date_observed}
-        Date Reported: {date_reported}
-        Category: {category}
-        Incident Types: {', '.join(incident_types)}
-        Uploaded File: {uploaded_file_url if upload else 'No file uploaded'}
-        """
-
-        send_mail(
-            subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
-            ["isaiahdurojaiye9@gmail.com"],
-            fail_silently=False,
+        # Create email
+        email = EmailMessage(
+            'New Incident Report',  # Subject
+            f'Incident ID: {id_no}\nDate: {date}\nDepartment: {department}\nLocation: {location}\nDescription: {description}\nCorrective Action: {corrective_action}\nDate Observed: {date_observed}\nDate Reported: {date_reported}\nObserved By: {observed_by}\nCategory: {", ".join(category)}\nIncident Type: {", ".join(incident_type)}',  # Body
+            settings.DEFAULT_FROM_EMAIL,  # From email
+            [isaiahdurojaiye9@gmail.com]  # To email
         )
 
-        return redirect("homepage")
-    return render(request, "incident_form.html")
+        # Attach the file if it's uploaded
+        if incident_upload:
+            email.attach(incident_upload.name, incident_upload.read(), incident_upload.content_type)
 
+        # Send email
+        email.send()
+
+        return HttpResponse("Incident report submitted successfully!")
+
+    return render(request, 'incident_form.html')
 
 # POOL_CAR_request_view
 def pool_car_request(request):
