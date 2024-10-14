@@ -112,7 +112,7 @@ header {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 36px;
+  font-size: 19px;
   font-family: "Poppins", sans-serif;
   font-style: normal;
 }
@@ -196,6 +196,17 @@ label{
 @media(min-width: 1450px){
   .navbar{
     height: 11.3vh;
+  }
+  .travelAirForm-btn, .travelCarForm-btn {
+    padding: 20px;
+    background-color: #497099;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 36px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
   }
 }
 @media(max-width: 800px){
