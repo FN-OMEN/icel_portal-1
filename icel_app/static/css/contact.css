@@ -76,7 +76,8 @@ h4{
 h2 {
   text-align: center;
   font-weight: 500;
-  margin: 10px 0;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 label {
@@ -104,7 +105,19 @@ textarea::placeholder {
   opacity: 0.6;
   color: gray;
 }
+.message {
+  font-size: 15px; /* Set font size to 12px */
+  border-radius: 5px;
+}
+.messages{
+  margin: 5px 0;
+}
 
+.success {
+  color: green; /* Dark green text color */
+  margin-bottom: 5px;
+  font-size: 12px;
+}
 input, textarea {
   width: 100%;
   padding: 10px;
@@ -138,7 +151,8 @@ textarea {
 
 .error {
   color: red;
-  margin-bottom: 10px;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 button {
@@ -164,6 +178,19 @@ button:hover {
 }
 form{
   z-index: 100;
+}
+
+ /* Styling the thank-you message */
+ .form-heading {
+  color: black;  /* Default color */
+  font-size: 2rem;  /* Default size */
+  transition: all 0.5s ease;  /* Smooth transition */
+}
+
+/* New style for the thank-you message */
+.thank-you-message {
+  color: green;  /* Change to green */
+  font-size: 1rem;  /* Reduce the font size */
 }
 @media (max-width: 1020px) {
   .container {

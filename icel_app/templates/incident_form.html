@@ -35,7 +35,7 @@
       <div class="mid-body-content">
         <div class="content-1">
           <p class="content-p">ID No. :</p>
-          <input type="text" name="id_no" value="ICEL/" minlength="15" maxlength="15" required>
+          <input type="text" name="id_no" value="ICEL/" maxlength="15">
         </div>
         <div class="content-2">
           <p class="content-p">Date :</p>
@@ -105,22 +105,22 @@
             <p>Observed by</p>
             <input type="text" name="observed_by" required>
           </div>
-          <div class="form-content-8">
-            <p>Incident Report Category</p>
-            <div class="selector">
-              <div id="selectField">
-                <p id="selectText">Select the appropriate category</p>
-                <i id="arrowIcon" class="fa-solid fa-caret-down" style="color: #ffffff;"></i>
-              </div>
-              <ul id="list" class="hide">
-                <li class="options"><input type="radio" name="category" value="PPE"> PPE</li>
-                <li class="options"><input type="radio" name="category" value="Work Environment"> Work Environment</li>
-                <li class="options"><input type="radio" name="category" value="Ergonomics"> Ergonomics</li>
-                <li class="options"><input type="radio" name="category" value="Tools & Equipments"> Tools & Equipments</li>
-                <li class="options"><input type="radio" name="category" value="Procedures"> Procedures</li>
-                <li class="options"><input type="radio" name="category" value="Slip"> Slip</li>
-                <li class="options"><input type="radio" name="category" value="Trip & Fall"> Trip & Fall</li>
-              </ul>
+          <div class="incident-type">
+            <h3>Select the appropriate category</h3>
+            <div class="incident-type-1">
+              <input type="checkbox" class="radio" value="PPE" name="category" /><label>PPE</label>
+            </div>
+            <div class="incident-type-1">
+              <input type="checkbox" class="radio" value="Tools & Equipments" name="category" /><label>Tools & Equipments</label>
+            </div>
+            <div class="incident-type-1">
+              <input type="checkbox" class="radio" value="Procedures" name="category" /><label>Procedures</label>
+            </div>
+            <div class="incident-type-1">
+              <input type="checkbox" class="radio" value="Slip" name="category" /><label>Slip</label>
+            </div>
+            <div class="incident-type-1">
+              <input type="checkbox" class="radio" value="Trip & Fall" name="category" /><label>Trip & Fall</label>
             </div>
           </div>
           <div class="form-content-9">

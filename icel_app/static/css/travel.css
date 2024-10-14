@@ -15,7 +15,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 15vh;
+  height: 10vh;
   z-index: 100;
 }
 .navbar-holder{
@@ -163,6 +163,9 @@ header {
   border-bottom: 2px solid #0056b3;
   transition: 0.5s;
 }
+label{
+  font-weight: 500;
+}
 .ticket-type p{
   margin: 5px 0;
 }
@@ -213,5 +216,8 @@ header {
   .travelForm{
     flex-direction: column;
     gap: 40px;
+  }
+  .dep-date label{
+    display: block;
   }
 }

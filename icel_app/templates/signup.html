@@ -45,11 +45,11 @@
           {% csrf_token %}
           <div class="input-box">
             <i class="fa-solid fa-user" style="color: #16b666;"></i>
-            <input id="username" class="username" type="text" name="username" placeholder="Enter your Title & Name (e.g Mr John)" required><br><br>
+            <input id="username" class="username" type="text" name="username" placeholder="Username (i.e First name)" required><br><br>
           </div>
           <div class="input-box">
             <i class="fa-solid fa-envelope" style="color: #16b666;"></i>
-            <input id="email-input" class="email" type="email" name="email" placeholder="Email (e.g. user@imperialcrestenergy.com)" required><br><br>
+            <input id="email-input" class="email" type="email" name="email" placeholder="Enter your email" required><br><br>
           </div>
           <div class="input-box">
             <i class="fa-solid fa-lock" style="color: #16b666;"></i>
@@ -70,32 +70,36 @@
   </div>
   <script>
     function togglePassword() {
-      var passwordField = document.getElementById("password");
-      var eyeIcon = document.getElementById("eyeicon");
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        eyeIcon.classList.remove("fa-eye");
-        eyeIcon.classList.add("fa-eye-slash");
-      } else {
-        passwordField.type = "password";
-        eyeIcon.classList.remove("fa-eye-slash");
-        eyeIcon.classList.add("fa-eye");
-      }
-    }
+  let showPassword = document.getElementById("eyeicon")
+  let password = document.getElementById("password")
+    
+  if (password.type === "password") {
+    password.type = "text"
+    showPassword.classList.remove('fa-eye')
+    showPassword.classList.add('fa-eye-slash')
+  }
+  else {
+    password.type = "password"
+    showPassword.classList.remove('fa-eye-slash')
+    showPassword.classList.add('fa-eye')
+  }
+}
 
-    function togglePassword2() {
-      var passwordField2 = document.getElementById("password-2");
-      var eyeIcon2 = document.getElementById("eyeicon-2");
-      if (passwordField2.type === "password") {
-        passwordField2.type = "text";
-        eyeIcon2.classList.remove("fa-eye");
-        eyeIcon2.classList.add("fa-eye-slash");
-      } else {
-        passwordField2.type = "password";
-        eyeIcon2.classList.remove("fa-eye-slash");
-        eyeIcon2.classList.add("fa-eye");
-      }
-    }
+function togglePassword2() {
+  let showPassword = document.getElementById("eyeicon-2")
+  let password = document.getElementById("password-2")
+    
+  if (password.type === "password") {
+    password.type = "text"
+    showPassword.classList.remove('fa-eye')
+    showPassword.classList.add('fa-eye-slash')
+  }
+  else {
+    password.type = "password"
+    showPassword.classList.remove('fa-eye-slash')
+    showPassword.classList.add('fa-eye')
+  }
+}
   </script>
 </body>
 </html>

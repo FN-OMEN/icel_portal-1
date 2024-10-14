@@ -1,4 +1,4 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,295 +6,296 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/travel.css' %}">
     <link rel="icon" href="{% static 'images/plane-solid.svg' %}">
 </head>
 <body>
   <style>
     body {
-  font-family: "Poppins", sans-serif;
-  font-style: normal;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100vh;
-  background: url("{% static 'images/luggage.jpg' %}") no-repeat center center fixed;
-  background-size: cover;
-  transition: background 2s ease-in-out;
-  flex-direction: column;
-}
+      font-family: "Poppins", sans-serif;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100vh;
+      background: url("{% static 'images/luggage.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      transition: background 2s ease-in-out;
+      flex-direction: column;
+    }
   </style>
-  <div class="content">
-    <div class="navbar">
-        <div class="navbar-holder">
-            <a href="{% url 'homepage' %}"><img src="{% static 'images/imperial-crest-logo.png' %}" alt="Logo"></a>
-        </div>
-    </div>
-</div>
-    </div>
-    <div id="travelFormContainer" class="container">
-      <div class="container-content">
-        <div class="close" onclick="hideForm()"><i class="fas fa-times"></i></div>
-        <header>Travel By Air</header>
 
-    <form method="post" action="{% url 'travel_notice' %}">
-    {% csrf_token %}
-    <div class="passenger-name">
-        <label>Name of Passenger(s) *</label>
-        <input type="text" name="passenger_name" required>
-        <input type="text" name="passenger_name">
-        <input type="text" name="passenger_name">
-    </div>
-    <div class="trip">
-        <div>
-            <label>Trip type *</label>
-        </div>
-        <div class="trip-1">
-            <input type="radio" name="trip-type" value="local" required><span>Local</span>
-        </div>
-        <div class="trip-1">
-            <input type="radio" name="trip-type" value="international"><span>International</span>
-        </div>
-    </div>
-    <div class="airline">
-        <label>Preferred Airline</label>
-        <span>(Subject to seat availability and other trip factors)</span>
-        <input type="text" name="preferred_airline">
-    </div>
-    <div class="airline">
-        <label>Preferred Flight Class *</label>
-        <span>(Subject to seat availability and other trip factors)</span>
-        <input type="text" name="preferred_flight_class" required>
-    </div>
-    <div class="ticket-type">
-        <label>Ticket Type *</label>
-        <div class="type-1">
-            <input type="radio" name="ticket-type" value="one_way" required>
-            <span>One way</span>
-        </div>
-        <div class="type-1">
-            <input type="radio" name="ticket-type" value="round_trip"><span>Round trip</span>
-        </div>
-    </div>
-    <div class="flight-type">
-        <label>Flight type *</label>
-        <div class="flight-1">
-            <input type="radio" name="flight-type" value="one_way_departure" required>
-            <span>One way Departure</span>
-        </div>
-        <div class="flight-1">
-            <input type="radio" name="flight-type" value="one_way_arrival" required>
-            <span>One way Arrival</span>
-        </div>
-        <div class="flight-1">
-            <input type="radio" name="flight-type" value="round_trip" required>
-            <span>Round trip: Departure and Arrival</span>
-        </div>
-    </div>
-    <div class="airline">
-        <label>Routes (Locations) *</label>
-        <input type="text" name="routes" required>
-    </div>
-    <div class="dep-date">
-        <label for="checkin">Departure Date *</label>
-        <input type="date" id="checkin" name="checkin" required>
-    </div>
-    <div class="departure-time">
-        <label for="departure-time">Preferred Departure Time(Origin-Destination) *</label>
-        <div>
-            <input type="radio" name="departure-time" value="6:00-9:00" required>
-            <span>6:00 - 9:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>9:00 - 12:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>12:00 - 15:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>15:00 - 18:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>18:00 - 21:00 Hrs.</span>
-        </div>
-    </div>
-    <div class="dep-date">
-        <label for="arrival_date">Arrival Date *</label>
-        <input type="date" id="arrival_date" name="arrival_date" required>
-    </div>
-    <div class="departure-time">
-        <label for="arrival-time">Preferred Arrival Time(Destination-Origin) *</label>
-        <div>
-            <input type="radio" name="arrival-time" value="6:00-9:00" required>
-            <span>6:00 - 9:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="arrival-time" required>
-          <span>9:00 - 12:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="arrival-time" required>
-          <span>12:00 - 15:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="arrival-time" required>
-          <span>15:00 - 18:00 Hrs.</span>
-        </div>
-        <div>
-          <input type="radio" name="arrival-time" required>
-          <span>18:00 - 21:00 Hrs.</span>
-        </div>
-    </div>
-    <div class="departure-time">
-        <label for="luggage_weight">Preferred Luggage Weight</label>
-        <div>
-            <input type="radio" name="luggage_weight" value="7kg" required>
-            <span>1 Cabin baggage of about 7kg or less</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>1 Cabin baggage and not more than 15kg check-in baggage</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>1 Cabin baggage and not more than 23kg check-in baggage</span>
-        </div>
-        <div>
-          <input type="radio" name="departure-time" required>
-          <span>1 Piece of 23kg check-in baggage</span>
-        </div>
-    </div>
-    <div class="submit">
-        <button type="submit" class="submit-btn">Submit</button>
-    </div>
+<div class="content">
+  <div class="navbar">
+      <div class="navbar-holder">
+          <a href="{% url 'homepage' %}"><img src="{% static 'images/imperial-crest-logo.png' %}" alt="Logo"></a>
+      </div>
+  </div>
+</div>
+  <div id="travelFormContainer" class="container">
+    <div class="container-content">
+      <div class="close" onclick="hideForm()"><i class="fas fa-times"></i></div>
+      <header>Travel By Air</header>
+  </div>
+  <form method="post" action="{% url 'travel_notice' %}">
+  {% csrf_token %}
+  <div class="passenger-name">
+      <label>Name of Passenger(s) *</label>
+      <input type="text" name="air_passenger_names" required>
+      <input type="text" name="air_passenger_names">
+      <input type="text" name="air_passenger_names">
+  </div>
+  <div class="trip">
+      <div>
+          <label>Trip type *</label>
+      </div>
+      <div class="trip-1">
+          <input type="radio" name="trip-type" value="Local" required><span>Local</span>
+      </div>
+      <div class="trip-1">
+          <input type="radio" name="trip-type" value="International"><span>International</span>
+      </div>
+  </div>
+  <div class="airline">
+      <label>Preferred Airline</label>
+      <span>(Subject to seat availability and other trip factors)</span>
+      <input type="text" name="preferred_airline">
+  </div>
+  <div class="airline">
+      <label>Preferred Flight Class *</label>
+      <span>(Subject to seat availability and other trip factors)</span>
+      <input type="text" name="preferred_flight_class" required>
+  </div>
+  <div class="ticket-type">
+      <label>Ticket Type *</label>
+      <div class="type-1">
+          <input type="radio" name="ticket-type" value="One Way" required>
+          <span>One way</span>
+      </div>
+      <div class="type-1">
+          <input type="radio" name="ticket-type" value="Round trip"><span>Round trip</span>
+      </div>
+  </div>
+  <div class="flight-type">
+      <label>Flight type *</label>
+      <div class="flight-1">
+          <input type="radio" name="flight-type" value="One way Departure" required>
+          <span>One way Departure</span>
+      </div>
+      <div class="flight-1">
+          <input type="radio" name="flight-type" value="One way Arrival" required>
+          <span>One way Arrival</span>
+      </div>
+      <div class="flight-1">
+          <input type="radio" name="flight-type" value="Round trip: Departure and Arrival" required>
+          <span>Round trip: Departure and Arrival</span>
+      </div>
+  </div>
+  <div class="airline">
+      <label>Routes (Locations) *</label>
+      <input type="text" name="routes" required>
+  </div>
+  <div class="dep-date">
+      <label for="checkin">Departure Date *</label>
+      <input type="date" id="checkin" name="checkin" required>
+  </div>
+  <div class="departure-time">
+      <label for="departure-time">Preferred Departure Time(Origin-Destination) *</label>
+      <div>
+          <input type="radio" name="departure-time" value="6:00-9:00 Hrs." required>
+          <span>6:00 - 9:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="departure-time" value="9:00 - 12:00 Hrs." required>
+        <span>9:00 - 12:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="departure-time" value="12:00 - 15:00 Hrs." required>
+        <span>12:00 - 15:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="departure-time" value="15:00 - 18:00 Hrs." required>
+        <span>15:00 - 18:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="departure-time" value="18:00 - 21:00 Hrs." required>
+        <span>18:00 - 21:00 Hrs.</span>
+      </div>
+  </div>
+  <div class="dep-date">
+      <label for="arrival_date">Arrival Date *</label>
+      <input type="date" id="arrival_date" name="arrival_date" required>
+  </div>
+  <div class="departure-time">
+      <label for="arrival-time">Preferred Arrival Time(Destination-Origin) *</label>
+      <div>
+          <input type="radio" name="arrival-time" value="6:00-9:00 Hrs." required>
+          <span>6:00 - 9:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="arrival-time" value="9:00 - 12:00 Hrs." required>
+        <span>9:00 - 12:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="arrival-time" value="12:00 - 15:00 Hrs." required>
+        <span>12:00 - 15:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="arrival-time" value="15:00 - 18:00 Hrs." required>
+        <span>15:00 - 18:00 Hrs.</span>
+      </div>
+      <div>
+        <input type="radio" name="arrival-time" value="18:00 - 21:00 Hrs." required>
+        <span>18:00 - 21:00 Hrs.</span>
+      </div>
+  </div>
+  <div class="departure-time">
+      <label for="luggage_weight">Preferred Luggage Weight</label>
+      <div>
+          <input type="radio" name="luggage_weight" value="1 Cabin baggage of about 7kg or less" required>
+          <span>1 Cabin baggage of about 7kg or less</span>
+      </div>
+      <div>
+        <input type="radio" name="luggage_weight" value="1 Cabin baggage and not more than 15kg check-in baggage" required>
+        <span>1 Cabin baggage and not more than 15kg check-in baggage</span>
+      </div>
+      <div>
+        <input type="radio" name="luggage_weight" value="1 Cabin baggage and not more than 23kg check-in baggage" required>
+        <span>1 Cabin baggage and not more than 23kg check-in baggage</span>
+      </div>
+      <div>
+        <input type="radio" name="luggage_weight" value="1 Piece of 23kg check-in baggage" required>
+        <span>1 Piece of 23kg check-in baggage</span>
+      </div>
+  </div>
+  <div class="submit">
+      <button type="submit" class="submit-btn">Submit</button>
+  </div>
 </form>
-      </div>
-    </div>
-    <div id="travelCarFormContainer" class="car-container">
-      <div class="container-content">
-        <div class="close" onclick="hideForm()"><i class="fas fa-times"></i></div>
-        <header>Travel By Road</header>
-        <form id="travelCarForm">
-          <div class="trip">
-            <div>
-              <label>What type of vehicle do you need *</label>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Toyota Prado 2020/21+</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Toyota LandCruiser GXR</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Lexus 570</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Toyota Corolla 2013/14+</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Toyota Camry 2013/14+</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Toyota Hilux Truck</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Coaster Bus</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Hiace Bus</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="vehicle-type" required><span>Mikano EADO DT Pool Car</span>
-            </div>
-          </div>
-          <div class="passenger-name">
-            <label>Name of Passenger(s) *</label>
-            <input type="text" required>
-            <input type="text">
-            <input type="text">
-            <input type="text">
-          </div>
-          <div class="trip">
-            <div>
-              <label>Journey type *</label>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="journey-type" required><span>Intra-State (Within Lagos)</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="journey-type" required><span>Inter-State e.g (Ife, Osun state)</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="journey-type" required><span>Staff Shuttle</span>
-            </div>
-          </div>
-          <div class="trip">
-            <div>
-              <label>Departure location *</label>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="departure-location" required><span>Force of Grace, Ikoyi</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="departure-location"><span>The Eshrow Building, VI.</span>
-            </div>
-            <div class="trip-1">
-              <input placeholder="If Other, specify" type="text" name="departure-location">
-            </div>
-          </div>
-          <div class="dep-date">
-            <label for="checkin">Departure Date *</label>
-            <input type="date" id="checkin" name="checkin" required>
-          </div>
-          <div class="dep-date">
-            <label for="checkin">Preferred Departure time *</label>
-            <input type="time" id="checkin" name="departure-time" required>
-          </div>
-          <div class="airline">
-            <label>Destination Location *</label>
-            <input type="text" required>
-          </div>
-          <div class="airline">
-            <label>Return Location *</label>
-            <input type="text" required>
-          </div>
-          <div class="dep-date">
-            <label for="checkin">Expected Arrival Date *</label>
-            <input type="date" id="checkin" name="arrival-date" required>
-          </div>
-          <div class="dep-date">
-            <label for="checkin">Expected Arrival time *</label>
-            <input type="time" id="checkin" name="arrival-time" required>
-          </div>
-          <div class="trip">
-            <div>
-              <label>Security Escort *</label>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="secrity-escort" required><span>Yes</span>
-            </div>
-            <div class="trip-1">
-              <input type="radio" name="secrity-escort" required><span>No</span>
-            </div>
-          </div>
-          <div class="submit">
-              <button type="submit" class="submit-btn">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="travelForm">
-        <button onclick="showForm()" type="button" class="travelAirForm-btn">Travel By Air</button>
-        <button onclick="showCarForm()" type="button" class="travelCarForm-btn">Travel By Road</button>
     </div>
   </div>
+  <div id="travelCarFormContainer" class="car-container">
+    <div class="container-content">
+      <div class="close" onclick="hideForm()"><i class="fas fa-times"></i></div>
+      <header>Travel By Road</header>
+      <form id="travelCarForm" method="post" action="{% url 'travel_notice' %}">
+        {% csrf_token %}
+        <div class="trip">
+          <div>
+            <label>What type of vehicle do you need *</label>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Toyota Prado 2020/21+" required><span>Toyota Prado 2020/21+</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Toyota LandCruiser GXR"><span>Toyota LandCruiser GXR</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Lexus 570"><span>Lexus 570</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Toyota Corolla 2013/14+"><span>Toyota Corolla 2013/14+</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Toyota Camry 2013/14+"><span>Toyota Camry 2013/14+</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Toyota Hilux Truck"><span>Toyota Hilux Truck</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Coaster Bus"><span>Coaster Bus</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Hiace Bus"><span>Hiace Bus</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="vehicle_type" value="Mikano EADO DT Pool Car"><span>Mikano EADO DT Pool Car</span>
+          </div>
+        </div>
+        <div class="passenger-name">
+          <label>Name of Passenger(s) *</label>
+          <input type="text" name="car_passenger_names" required>
+          <input type="text" name="car_passenger_names">
+          <input type="text" name="car_passenger_names">
+          <input type="text" name="car_passenger_names">
+        </div>
+        <div class="trip">
+          <div>
+            <label>Journey type *</label>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="journey_type" value="Intra-State (Within Lagos)" required><span>Intra-State (Within Lagos)</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="journey_type" value="Inter-State" required><span>Inter-State e.g (Ife, Osun state)</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="journey_type" value="Staff Shuttle" required><span>Staff Shuttle</span>
+          </div>
+        </div>
+        <div class="trip">
+          <div>
+            <label>Departure location *</label>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="car-departure-location" value="Force of Grace, Ikoyi"><span>Force of Grace, Ikoyi</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="car-departure-location" value="The Eshrow Building, VI."><span>The Eshrow Building, VI.</span>
+          </div>
+          <div class="trip-1">
+            <input placeholder="If Other, specify" type="text" name="car-departure-location">
+          </div>
+        </div>
+        <div class="dep-date">
+          <label for="checkin">Departure Date *</label>
+          <input type="date" id="checkin" name="departure_date_car" required>
+        </div>
+        <div class="dep-date">
+          <label for="checkin">Preferred Departure time *</label>
+          <input type="time" id="checkin" name="car-departure-time" required>
+        </div>
+        <div class="airline">
+          <label>Destination Location *</label>
+          <input type="text" name="car-destination-location" required>
+        </div>
+        <div class="airline">
+          <label>Return Location *</label>
+          <input type="text" name="car-return-location" required>
+        </div>
+        <div class="dep-date">
+          <label for="checkin">Expected Arrival Date *</label>
+          <input type="date" id="checkin" name="car-arrival-date" required>
+        </div>
+        <div class="dep-date">
+          <label for="checkin">Expected Arrival time *</label>
+          <input type="time" id="checkin" name="car-arrival-time" required>
+        </div>
+        <div class="trip">
+          <div>
+            <label>Security Escort *</label>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="security-escort" value="Yes" required><span>Yes</span>
+          </div>
+          <div class="trip-1">
+            <input type="radio" name="security-escort" value="No" required><span>No</span>
+          </div>
+        </div>
+        <div class="submit">
+            <button type="submit" class="submit-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="travelForm">
+      <button onclick="showForm()" type="button" class="travelAirForm-btn">Travel By Air</button>
+      <button onclick="showCarForm()" type="button" class="travelCarForm-btn">Travel By Road</button>
+  </div>
+</div>
 
   <script src="{% static 'js/travel.js' %}"></script>
 </body>

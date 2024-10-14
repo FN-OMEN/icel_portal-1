@@ -49,6 +49,20 @@ body{
   flex-shrink: 1;
   margin: 0 8px;
 }
+    /* Style the success messages to appear in green */
+    .messages .success {
+      color: green;         /* Change text color to green */
+      font-weight: bold;    /* Optional: Make the text bold */
+      padding: 10px;        /* Optional: Add some padding for visibility */
+      margin-top: 10px;     /* Space between the message and other elements */
+  }
+  ul.messages{
+    padding-left: 0;
+    width: 100%;
+  }
+  .error{
+    border: 0px;
+  }
 .right-content-carrier{
   width: 65%;
   display: flex;
@@ -189,9 +203,7 @@ form{
   font-size: 14px;
   font-weight: 500;
   margin: 0;
-}
-.error{
-  border: 2px solid rgb(252, 106, 106);
+  text-align: center;
 }
 @media(min-width: 1450px){
   .container{

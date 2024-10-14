@@ -68,6 +68,14 @@ body{
   justify-content: center;
   align-items: center;
 }
+ul.errorlist {
+  list-style-type: none;  /* Removes the bullet points */
+  padding-left: 0;       /* Removes padding for the list */
+  color: red;             /* Changes the text color to red */
+}
+ul.errorlist li {
+  color: red;             /* Ensures that individual error messages are red */
+}
 .right-content-carrier h1{
   width: 100%;
   text-align: center;

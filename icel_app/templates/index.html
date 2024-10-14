@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -32,14 +33,14 @@
         <h1>Log In</h1>
         <div class="user">
           <img width="150px" src="{% static 'images/imperial-crest-logo.png' %}">
-        </div>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                  <div class="error-message">{{ message }}</div>
-            {% endfor %}
-        </ul>
-        {% endif %}
+          </div>
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+                  <div class="{% if message.tags %}{{ message.tags }}{% endif %} error-message">{{ message }}</div>
+              {% endfor %}
+          </ul>
+          {% endif %}          
         <form method="POST" action="{% url 'index' %}">
           {% csrf_token %}
             {{form.as_p}}

@@ -92,12 +92,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "ayokanmiamos@gmail.com"
-EMAIL_HOST_PASSWORD = "lkzf ovgf dnvx kcna"
-DEFAULT_FROM_EMAIL = 'ayokanmiamos@gmail.com'
-RECEIVER_EMAIL = 'onidavid59@gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = "isaiahdurojaiye9@gmail.com"
+EMAIL_HOST_PASSWORD = "avro eeud eamz gwch"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

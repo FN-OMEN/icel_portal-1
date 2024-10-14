@@ -1,14 +1,23 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'images/check-solid.svg' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/success.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Success</title>
 </head>
 <body>
-    <h1>Thank you for your message!</h1>
-    <p>We will get back to you shortly.</p>
-    <a href="{% url 'homepage' %}">Return to homepage</a>
+    <center>
+        <div class="success-container">
+            <img src="{% static 'images/card-payment.svg' %}" alt="Success Icon">
+            <h1>Your submission was received :)</h1>
+            <p>Thank you for the message!</p>
+            <button><a href="{% url 'homepage' %}">Back to Home</a></button>
+        </div>
+    </center>
 </body>
 </html>

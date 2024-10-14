@@ -13,9 +13,10 @@ document.getElementById('contactForm').addEventListener('submit', function(event
   if (error) {
       document.getElementById('error').textContent = error;
   } else {
-      document.getElementById('error').textContent = '';
+      document.getElementById('error').textContent = ' ';
       alert('Form submitted successfully!');
       // Optionally, add code here to send the form data to a server
       document.getElementById('contactForm').reset();
   }
 });
+

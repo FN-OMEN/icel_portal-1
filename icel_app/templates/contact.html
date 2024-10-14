@@ -1,4 +1,4 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +45,14 @@
     </div>
     <div class="right">
       <img width="800px" src="{% static 'images/sustainability.png' %}">
-      <h2>Fill in your Complaint</h2>
+      <h2 class="form-heading">Fill in your Complaint</h2>
+      {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+                  <div class="{% if message.tags %}{{ message.tags }}{% endif %} error-message">{{ message }}</div>
+              {% endfor %}
+          </ul>
+          {% endif %}  
       <form id="contactForm" method="POST" action="{% url 'contact' %}">
         {% csrf_token %}
         <label for="firstName">Tell us your name *</label>
@@ -66,11 +73,10 @@
           <textarea id="message" name="message" rows="5" placeholder="Write your issue to us" required></textarea>
         </div>
         <div class="submit-btn">
-            <button type="submit">SEND MESSAGE</button>
+            <button type="submit" type="reset">SEND MESSAGE</button>
         </div>
       </form>
     </div>
   </div>
-  <script src="{% static 'js/contact.js' %}"></script>
 </body>
 </html>

@@ -1,3 +1,9 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 * {
   margin: 0;
   padding: 0;
@@ -55,15 +61,19 @@
 }
 
 .mid-body-container {
-  width: 90%;
-  text-align: left;
-  margin: auto;
+  width: 100%;
   margin-top: 50px; 
 }
 
 .mid-body-container h1 {
   color: rgba(3, 18, 39, 0.911);
   display: inline-block;
+}
+
+.mid-body-header{
+  margin: 50px auto 0 auto;
+  text-align: left;
+  width: 90%;
 }
 
 .mid-body-container h1::after {
@@ -75,11 +85,13 @@
 }
 
 .mid-body-content {
-  margin-top: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 180px;
   row-gap: 30px;
+  margin: 50px auto 0 auto;
+  text-align: left;
+  width: 90%;
 }
 
 .content-desc {
@@ -172,6 +184,9 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 180px;
   row-gap: 30px;
+  margin: 50px auto 0 auto;
+  text-align: left;
+  width: 90%;
 }
 
 .mid-body-content-2 p, .upload{
@@ -236,8 +251,10 @@
 }
 
 .submission {
-  margin-bottom: 25px;
   margin-top: 25px;
+  margin: 50px auto 40px auto;
+  text-align: left;
+  width: 90%;
 }
 
 .submission button {
